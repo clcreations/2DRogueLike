@@ -91,13 +91,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb8206eefbe05d42b535fe0117520db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: 0.1
+  moveTime: 0.05
   blockingLayer:
     serializedVersion: 2
     m_Bits: 256
   playerDamage: 20
   enemyAttack1: {fileID: 8300000, guid: 0db8cac2749584a009540aa5671ee80d, type: 3}
   enemyAttack2: {fileID: 8300000, guid: 114514a3b3697484ebaa08f7fbf842d3, type: 3}
+  alive: 1
 --- !u!212 &21297192
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -124,7 +125,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -900995045
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 5452cd57b14c45b499f7871b42165602, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -151,6 +152,10 @@ Prefab:
       propertyPath: enemyAttack2
       value: 
       objectReference: {fileID: 8300000, guid: 114514a3b3697484ebaa08f7fbf842d3, type: 3}
+    - target: {fileID: 0}
+      propertyPath: moveTime
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 124674}

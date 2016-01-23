@@ -18,7 +18,7 @@ QualitySettings:
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     blendWeights: 1
-    textureQuality: 1
+    textureQuality: 0
     anisotropicTextures: 0
     antiAliasing: 0
     softParticles: 0
@@ -176,6 +176,7 @@ QualitySettings:
     Tizen: 2
     WP8: 3
     Web: 3
+    WebGL: 3
     Windows Store Apps: 3
     XBOX360: 3
     XboxOne: 3

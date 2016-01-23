@@ -19,6 +19,8 @@ public class Player : MovingObject {
     public AudioClip drinkSound1;
     public AudioClip drinkSound2;
     public AudioClip gameOverSound;
+    public AudioClip zombieDie1;
+    public AudioClip zombieDie2;
 
 
     private Animator animator;
@@ -46,22 +48,11 @@ public class Player : MovingObject {
         v = (int) CrossPlatformInputManager.GetAxisRaw("Vertical");
         if (h != 0) v = 0;
         if (!(h == 0 && v == 0)){
-            AttemptMove<Wall>(h, v);
+            AttemptMove(h, v);
         }
-
-        //horizontal = (int) Input.GetAxisRaw("Horizontal");
-        //vertical = (int) Input.GetAxisRaw("Vertical");
-
-        //if (horizontal != 0) vertical = 0;
-        //if (horizontal != 0 || vertical != 0){
-        //    AttemptMove<Wall>(horizontal, vertical);
-        //}
-        // DEBUG
-        //Debug.Log("Food is " + food);
     }
 
     private void OnTriggerEnter2D (Collider2D other){
-        Debug.Log("Collided with trigger " + other.name);
         if (other.tag == "Exit"){
             Invoke("Restart", restartLevelDelay);
             enabled = false;
@@ -75,20 +66,34 @@ public class Player : MovingObject {
             foodText.text = "+" + pointsPerSoda + " Food: " + food;
             SoundManager.instance.RandomizeSfx(drinkSound1, drinkSound2);
             other.gameObject.SetActive(false);
+        }else if (other.tag == "Knife"){
+            GameManager.instance.GetKnife(other.gameObject);
         }
 
     }
 
-    protected override void OnCantMove<T>(T component){
-        Wall hitWall = component as Wall;
-        hitWall.DamageWall(wallDamage);
-        animator.SetTrigger("playerChop");
+    protected override void OnCantMove(Transform t){
+        Debug.Log("Running into " + t);
+        Wall wall = t.GetComponent<Wall>();
+        Enemy enemy = t.GetComponent<Enemy>();
+        if (wall){
+            Debug.Log("Running into Wall");
+            wall.DamageWall(wallDamage);
+            animator.SetTrigger("playerChop");
+        }else if(enemy){
+            Debug.Log("Running into Enemy");
+                if (GameManager.instance.UseKnife(enemy)){
+                    enemy.Die();
+                    SoundManager.instance.RandomizeSfx(zombieDie1, zombieDie2);
+                }
+        }
+
     }
 
     private void Restart(){
         //Application.LoadLevel(Application.loadedLevel);
         SceneManager.LoadScene("Main");
-        
+
     }
 
     public void LoseFood(int loss){
@@ -98,11 +103,11 @@ public class Player : MovingObject {
         CheckIfGameOver();
     }
 
-    protected override void AttemptMove<T>(int xDir, int yDir){
+    protected override void AttemptMove(int xDir, int yDir){
         food--;
         foodText.text = "Food: " + food;
 
-        base.AttemptMove<T>(xDir, yDir);
+        base.AttemptMove(xDir, yDir);
 
         RaycastHit2D hit;
         if (Move (xDir, yDir, out hit)){
@@ -120,7 +125,5 @@ public class Player : MovingObject {
             GameManager.instance.GameOver();
         }
     }
-
-
 
 } // public class Player : MovingObject {

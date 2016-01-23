@@ -5,6 +5,7 @@ public class Enemy : MovingObject {
     public int playerDamage;
     public AudioClip enemyAttack1;
     public AudioClip enemyAttack2;
+    public bool alive = true;
 
     Animator animator;
     Transform target;
@@ -17,14 +18,21 @@ public class Enemy : MovingObject {
         base.Start();
     }
 
-    protected override void AttemptMove<T>(int xDir, int yDir){
+    protected override void AttemptMove(int xDir, int yDir){
         if (skipMove){
             skipMove = false;
             return;
+        }else if (!alive){
+            return;
         }
 
-        base.AttemptMove<T>(xDir, yDir);
+        base.AttemptMove(xDir, yDir);
         skipMove = true;
+    }
+
+    public void Die(){
+        alive = false;
+        animator.SetTrigger("enemyDie");
     }
 
     public void MoveEnemy(){
@@ -37,16 +45,18 @@ public class Enemy : MovingObject {
             xDir = target.position.x > transform.position.x ? 1 : -1;
         }
 
-        AttemptMove<Player>(xDir, yDir);
+        AttemptMove(xDir, yDir);
     }
 
-    protected override void OnCantMove<T>(T component){
-        Player hitPlayer = component as Player;
+    protected override void OnCantMove(Transform t){
+        Player player = t.GetComponent<Player>();
+        if (player){
+            animator.SetTrigger("enemyAttack");
+            SoundManager.instance.RandomizeSfx(enemyAttack1, enemyAttack2);
 
-        animator.SetTrigger("enemyAttack");
-        SoundManager.instance.RandomizeSfx(enemyAttack1, enemyAttack2);
-
-        hitPlayer.LoseFood(playerDamage);
+            player.LoseFood(playerDamage);
+            GameManager.instance.ShakeScreen();
+        }
     }
 
 } // public class Enemy : MovingObject {

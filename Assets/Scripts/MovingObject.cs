@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class MovingObject : MonoBehaviour {
 
-    public float moveTime = 0.1f;
+    public float moveTime = 0.01f;
     public LayerMask blockingLayer;
 
     private BoxCollider2D boxCollider;
@@ -32,8 +32,7 @@ public abstract class MovingObject : MonoBehaviour {
         return false;
     }
 
-    protected virtual void AttemptMove <T> (int xDir, int yDir)
-        where T : Component
+    protected virtual void AttemptMove (int xDir, int yDir)
     {
         RaycastHit2D hit;
         bool canMove = Move(xDir, yDir, out hit);
@@ -41,10 +40,8 @@ public abstract class MovingObject : MonoBehaviour {
             return;
         }
 
-        T hitComponent = hit.transform.GetComponent<T>();
-
-        if (!canMove && hitComponent != null){
-            OnCantMove(hitComponent);
+        if (!canMove){
+            OnCantMove(hit.transform);
         }
     }
 
@@ -60,7 +57,6 @@ public abstract class MovingObject : MonoBehaviour {
         }
     }
 
-    protected abstract void OnCantMove<T>(T component)
-        where T : Component;
+    protected abstract void OnCantMove(Transform t);
 
 } // public class MovingObject : MonoBehaviour {
