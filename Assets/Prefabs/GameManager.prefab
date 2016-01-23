@@ -41,9 +41,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelStartDelay: 2
-  turnDelay: 0.1
+  turnDelay: 0.2
   boardScript: {fileID: 0}
   playerFoodPoints: 100
+  knifeCount: 1
+  level: 1
   playersTurn: 1
 --- !u!114 &11486460
 MonoBehaviour:
@@ -59,11 +61,14 @@ MonoBehaviour:
   columns: 16
   rows: 8
   wallCount:
-    minimum: 5
-    maximum: 9
+    minimum: 12
+    maximum: 20
   foodCount:
-    minimum: 1
-    maximum: 5
+    minimum: 2
+    maximum: 6
+  knifeCount:
+    minimum: 0
+    maximum: 1
   exit: {fileID: 191738, guid: 0d6458ef1401d9b4db406f0ae7aa7864, type: 2}
   floorTiles:
   - {fileID: 101012, guid: 45064b5995f4ba042aa61d5e6753d359, type: 2}
@@ -93,6 +98,8 @@ MonoBehaviour:
   - {fileID: 197480, guid: 944c8f4333b502e46b3deaf43f42495e, type: 2}
   - {fileID: 133356, guid: 27b694a77ed377e4d8c40b2adb7c7fc2, type: 2}
   - {fileID: 170656, guid: 4b54ad1b79c67a2408913442d77d5967, type: 2}
+  knifeTiles:
+  - {fileID: 103284, guid: 4a6881e3b3184dc4da5c458baaebf278, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -101,8 +108,36 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: knifeTiles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: columns
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: turnDelay
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: wallCount.minimum
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: wallCount.maximum
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: foodCount.minimum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: foodCount.maximum
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: level
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

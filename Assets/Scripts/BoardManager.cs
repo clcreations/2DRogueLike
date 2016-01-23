@@ -20,14 +20,16 @@ public class BoardManager : MonoBehaviour {
     public int columns = 14;
     public int rows = 8;
 
-    public Count wallCount = new Count(8,13);
+    public Count wallCount = new Count(12,20);
     public Count foodCount = new Count(1,5);
+    public Count knifeCount = new Count(0,1);
     public GameObject exit;
     public GameObject[] floorTiles;
     public GameObject[] wallTiles;
     public GameObject[] foodTiles;
     public GameObject[] enemyTiles;
     public GameObject[] outerWallTiles;
+    public GameObject[] knifeTiles;
 
     // Organizational tool to child the many gameobjects we create
     Transform boardHolder;
@@ -89,6 +91,8 @@ public class BoardManager : MonoBehaviour {
         InitializeList();
         LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
         LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
+        LayoutObjectAtRandom(
+            knifeTiles, knifeCount.minimum, knifeCount.maximum);
 
         // Logarithmic difficulty curve
         // 1 enemy at 2, 2 at level 4, 4 at level 8, etc.

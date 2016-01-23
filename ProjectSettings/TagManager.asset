@@ -8,6 +8,7 @@ TagManager:
   - Exit
   - Enemy
   - Soda
+  - Knife
   layers:
   - Default
   - TransparentFX

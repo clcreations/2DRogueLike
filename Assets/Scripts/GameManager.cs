@@ -6,18 +6,24 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
     public float levelStartDelay = 2f;
-    public float turnDelay = 0.1f;
+    public float turnDelay = 0.2f;
     public static GameManager instance = null;
     public BoardManager boardScript;
     public int playerFoodPoints = 100;
+    public int knifeCount = 1;
+    public int level = 1;
     [HideInInspector] public bool playersTurn = true;
 
-    int level = 1;
     List<Enemy> enemies;
     bool enemiesMoving;
     Text levelText;
+    Text knifeText;
     GameObject levelImage;
+    CameraManager cam;
     bool doingSetup;
+    float shake;
+
+    const float SCREENSHAKE = 0.333f;
 
     void Awake(){
         if (instance == null){
@@ -42,13 +48,34 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void GetKnife(GameObject gameObject){
+        if (knifeCount < 3){
+            knifeCount++;
+            knifeText.text = knifeCount.ToString();
+        }
+        gameObject.SetActive(false);
+    }
+
+    public bool UseKnife(Enemy enemy){
+        if (knifeCount > 0 && enemy.alive){
+            knifeCount--;
+            knifeText.text = knifeCount.ToString();
+            return true;
+        }
+        return false;
+    }
+
     void InitGame(){
         doingSetup = true;
 
         levelImage = GameObject.Find("LevelImage");
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
+        knifeText = GameObject.Find("KnifeText").GetComponent<Text>();
+        GameObject camObject = GameObject.FindGameObjectWithTag("MainCamera");
+        cam = camObject.GetComponent<CameraManager>();
 
         levelText.text = "Day " + level;
+        knifeText.text = knifeCount.ToString();
         levelImage.SetActive(true);
         Invoke("HideLevelImage", levelStartDelay);
         enemies.Clear();
@@ -81,12 +108,7 @@ public class GameManager : MonoBehaviour {
     IEnumerator MoveEnemies(){
         enemiesMoving = true;
         yield return new WaitForSeconds(turnDelay);
-        if (enemies.Count == 0){
-            yield return new WaitForSeconds(turnDelay);
-        }
 
-        //for (int i = 0; i < enemies.Count; i++){
-        //}
         foreach(Enemy enemy in enemies){
             enemy.MoveEnemy();
             yield return new WaitForSeconds(enemy.moveTime);
@@ -94,6 +116,9 @@ public class GameManager : MonoBehaviour {
 
         playersTurn = true;
         enemiesMoving = false;
+    }
+    public void ShakeScreen(){
+        cam.ShakeScreen(SCREENSHAKE, SCREENSHAKE);
     }
 
 } // public class GameManager : MonoBehaviour {
