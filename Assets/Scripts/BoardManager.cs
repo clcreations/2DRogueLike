@@ -94,9 +94,13 @@ public class BoardManager : MonoBehaviour {
         LayoutObjectAtRandom(
             knifeTiles, knifeCount.minimum, knifeCount.maximum);
 
-        // Logarithmic difficulty curve
-        // 1 enemy at 2, 2 at level 4, 4 at level 8, etc.
-        int enemyCount = (int)Mathf.Log(level, 2f);
+        // 1 at 2, 2 at 4, 3 at 8, then level / 5 + 1
+        int enemyCount;
+        if (level < 11){
+             enemyCount = (int)Mathf.Log(level, 2f);
+        }else{
+            enemyCount = (level / 5) + 1;
+        }
 
         LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
         Instantiate(exit,

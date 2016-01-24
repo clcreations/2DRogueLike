@@ -86,6 +86,7 @@ public class Player : MovingObject {
             Debug.Log("Running into Enemy");
                 if (GameManager.instance.UseKnife(enemy)){
                     enemy.Die();
+                    animator.SetTrigger("playerStab");
                     SoundManager.instance.RandomizeSfx(zombieDie1, zombieDie2);
                 }
         }
