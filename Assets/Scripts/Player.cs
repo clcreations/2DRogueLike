@@ -21,6 +21,7 @@ public class Player : MovingObject {
     public AudioClip gameOverSound;
     public AudioClip zombieDie1;
     public AudioClip zombieDie2;
+    public AudioClip powerup;
 
 
     private Animator animator;
@@ -68,6 +69,7 @@ public class Player : MovingObject {
             other.gameObject.SetActive(false);
         }else if (other.tag == "Knife"){
             GameManager.instance.GetKnife(other.gameObject);
+            SoundManager.instance.RandomizeSfx(powerup);
         }
 
     }

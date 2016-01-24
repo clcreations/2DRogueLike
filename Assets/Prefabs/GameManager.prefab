@@ -47,6 +47,7 @@ MonoBehaviour:
   knifeCount: 1
   level: 1
   playersTurn: 1
+  floatText: {fileID: 143330, guid: 8224e480cf6e465468246e7b300c9f73, type: 2}
 --- !u!114 &11486460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,6 +140,18 @@ Prefab:
       propertyPath: level
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: plusOne
+      value: 
+      objectReference: {fileID: 143330, guid: 8224e480cf6e465468246e7b300c9f73, type: 2}
+    - target: {fileID: 0}
+      propertyPath: minusOne
+      value: 
+      objectReference: {fileID: 146992, guid: 7c2f032a5a8abeb49bcfaed939b2a967, type: 2}
+    - target: {fileID: 0}
+      propertyPath: floatText
+      value: 
+      objectReference: {fileID: 143330, guid: 8224e480cf6e465468246e7b300c9f73, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 128338}
