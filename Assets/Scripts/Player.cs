@@ -21,6 +21,7 @@ public class Player : MovingObject {
     public AudioClip gameOverSound;
     public AudioClip zombieDie1;
     public AudioClip zombieDie2;
+    public AudioClip powerup;
 
 
     private Animator animator;
@@ -68,6 +69,7 @@ public class Player : MovingObject {
             other.gameObject.SetActive(false);
         }else if (other.tag == "Knife"){
             GameManager.instance.GetKnife(other.gameObject);
+            SoundManager.instance.RandomizeSfx(powerup);
         }
 
     }
@@ -84,6 +86,7 @@ public class Player : MovingObject {
             Debug.Log("Running into Enemy");
                 if (GameManager.instance.UseKnife(enemy)){
                     enemy.Die();
+                    animator.SetTrigger("playerStab");
                     SoundManager.instance.RandomizeSfx(zombieDie1, zombieDie2);
                 }
         }

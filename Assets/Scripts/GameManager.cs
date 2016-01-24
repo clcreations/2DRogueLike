@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     public int knifeCount = 1;
     public int level = 1;
     [HideInInspector] public bool playersTurn = true;
+    public GameObject floatText;
 
     List<Enemy> enemies;
     bool enemiesMoving;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour {
     CameraManager cam;
     bool doingSetup;
     float shake;
+    GameObject knifeCountPanel;
 
     const float SCREENSHAKE = 0.333f;
 
@@ -52,14 +54,22 @@ public class GameManager : MonoBehaviour {
         if (knifeCount < 3){
             knifeCount++;
             knifeText.text = knifeCount.ToString();
+            FloatText("+1");
         }
         gameObject.SetActive(false);
+    }
+
+    public void FloatText(string textToFloat){
+        GameObject floating = Instantiate(floatText) as GameObject;
+        floating.GetComponent<Text>().text = textToFloat;
+        floating.transform.SetParent(knifeCountPanel.transform);
     }
 
     public bool UseKnife(Enemy enemy){
         if (knifeCount > 0 && enemy.alive){
             knifeCount--;
             knifeText.text = knifeCount.ToString();
+            FloatText("-1");
             return true;
         }
         return false;
@@ -71,6 +81,7 @@ public class GameManager : MonoBehaviour {
         levelImage = GameObject.Find("LevelImage");
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
         knifeText = GameObject.Find("KnifeText").GetComponent<Text>();
+        knifeCountPanel = GameObject.Find("KnifeCountPanel");
         GameObject camObject = GameObject.FindGameObjectWithTag("MainCamera");
         cam = camObject.GetComponent<CameraManager>();
 
