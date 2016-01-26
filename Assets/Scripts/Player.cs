@@ -21,7 +21,6 @@ public class Player : MovingObject {
     public AudioClip gameOverSound;
     public AudioClip zombieDie1;
     public AudioClip zombieDie2;
-    public AudioClip powerup;
 
 
     private Animator animator;
@@ -69,13 +68,11 @@ public class Player : MovingObject {
             other.gameObject.SetActive(false);
         }else if (other.tag == "Knife"){
             GameManager.instance.GetKnife(other.gameObject);
-            SoundManager.instance.RandomizeSfx(powerup);
         }
 
     }
 
     protected override void OnCantMove(Transform t){
-        Debug.Log("Running into " + t);
         Wall wall = t.GetComponent<Wall>();
         Enemy enemy = t.GetComponent<Enemy>();
         if (wall){
@@ -87,16 +84,14 @@ public class Player : MovingObject {
                 if (GameManager.instance.UseKnife(enemy)){
                     enemy.Die();
                     animator.SetTrigger("playerStab");
-                    SoundManager.instance.RandomizeSfx(zombieDie1, zombieDie2);
+                    SoundManager.instance.PrioritySfx(zombieDie1, zombieDie2);
                 }
         }
 
     }
 
     private void Restart(){
-        //Application.LoadLevel(Application.loadedLevel);
         SceneManager.LoadScene("Main");
-
     }
 
     public void LoseFood(int loss){

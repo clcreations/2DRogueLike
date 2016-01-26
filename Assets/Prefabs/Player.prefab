@@ -109,7 +109,6 @@ MonoBehaviour:
   gameOverSound: {fileID: 8300000, guid: e2beefeb2273f4efe992adf5b8d67c29, type: 3}
   zombieDie1: {fileID: 8300000, guid: 2006e4fe2ef307a439b1dedeb24c2030, type: 3}
   zombieDie2: {fileID: 8300000, guid: baf7d886e25146a4a9942ac6836f50af, type: 3}
-  powerup: {fileID: 8300000, guid: 806754c7323895b44ab601ac933a0773, type: 3}
 --- !u!212 &21281478
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -135,7 +134,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -900995045
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -159,6 +158,10 @@ Prefab:
       propertyPath: powerup
       value: 
       objectReference: {fileID: 8300000, guid: 806754c7323895b44ab601ac933a0773, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 197766}

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SoundManager : MonoBehaviour {
     public AudioSource sfxSource;
+    public AudioSource extraSource;
     public AudioSource musicSource;
     public static SoundManager instance = null;
 
@@ -22,6 +23,14 @@ public class SoundManager : MonoBehaviour {
     public void PlaySingle(AudioClip clip){
         sfxSource.clip = clip;
         sfxSource.Play();
+    }
+
+    public void PrioritySfx(params AudioClip[] clips){
+        int randomIndex = Random.Range(0, clips.Length);
+        float randomPitch = Random.Range(lowPitchRange, highPitchRange);
+        extraSource.pitch = randomPitch;
+        extraSource.clip = clips[randomIndex];
+        extraSource.Play();
     }
 
     public void RandomizeSfx(params AudioClip[] clips){

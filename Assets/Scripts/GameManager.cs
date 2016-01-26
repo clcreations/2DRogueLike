@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour {
     public int level = 1;
     [HideInInspector] public bool playersTurn = true;
     public GameObject floatText;
+    public AudioClip badSound;
+    public AudioClip powerup;
 
     List<Enemy> enemies;
     bool enemiesMoving;
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour {
     GameObject knifeCountPanel;
 
     const float SCREENSHAKE = 0.333f;
+    const float SCREENSHAKE_LOW = 0.15f;
 
     void Awake(){
         if (instance == null){
@@ -55,6 +58,11 @@ public class GameManager : MonoBehaviour {
             knifeCount++;
             knifeText.text = knifeCount.ToString();
             FloatText("+1");
+            SoundManager.instance.PlaySingle(powerup);
+        }else {
+            knifeText.GetComponent<Animator>().SetTrigger("blinkRed");
+            SoundManager.instance.PlaySingle(badSound);
+            cam.ShakeScreen(SCREENSHAKE, SCREENSHAKE_LOW);
         }
         gameObject.SetActive(false);
     }
