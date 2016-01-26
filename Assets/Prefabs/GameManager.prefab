@@ -48,6 +48,8 @@ MonoBehaviour:
   level: 1
   playersTurn: 1
   floatText: {fileID: 143330, guid: 8224e480cf6e465468246e7b300c9f73, type: 2}
+  badSound: {fileID: 8300000, guid: 49c5d8c91a8144941b92f85cccfdea35, type: 3}
+  powerup: {fileID: 8300000, guid: 806754c7323895b44ab601ac933a0773, type: 3}
 --- !u!114 &11486460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,6 +154,18 @@ Prefab:
       propertyPath: floatText
       value: 
       objectReference: {fileID: 143330, guid: 8224e480cf6e465468246e7b300c9f73, type: 2}
+    - target: {fileID: 0}
+      propertyPath: badSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 49c5d8c91a8144941b92f85cccfdea35, type: 3}
+    - target: {fileID: 0}
+      propertyPath: powerup
+      value: 
+      objectReference: {fileID: 8300000, guid: 806754c7323895b44ab601ac933a0773, type: 3}
+    - target: {fileID: 0}
+      propertyPath: knifeCount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 128338}
