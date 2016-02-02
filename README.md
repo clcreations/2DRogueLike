@@ -6,4 +6,4 @@ Expanding an official unity tutorial - Found here: https://unity3d.com/learn/tut
 
 Messing with this tutorial with mobile in mind
 
-![](http://i.imgur.com/rY4i3sE.gif)
+![](http://clcreations.github.io/2droguelike/demonstration.gif)
